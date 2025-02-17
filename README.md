@@ -1,5 +1,7 @@
 # Infinite Tic Tac Toe
- An infinite tic tac toe game 
+ An infinite tic tac toe game
+
+ great game! 
 
 Infinite Tic Tac Toe is a unique twist on the classic Tic Tac Toe game. Instead of a static 3x3 grid, the game features a sliding window of moves, where each player's oldest move disappears after they make their 4th move. This creates a dynamic and ever-changing board, adding a new layer of strategy to the game.
 
