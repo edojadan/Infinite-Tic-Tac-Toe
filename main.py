@@ -60,6 +60,7 @@ def load_scores():
         with open("scores.txt", "r") as file:
             lines = file.readlines()
             for line in lines:
+                line = line.strip()  # Remove leading/trailing whitespace
                 if "Player vs AI:" in line:
                     continue
                 elif "Easy:" in line:
@@ -72,8 +73,10 @@ def load_scores():
                     scores["PVAI"]["Hard"]["Wins"] = int(line.split("Wins=")[1].split(",")[0])
                     scores["PVAI"]["Hard"]["Losses"] = int(line.split("Losses=")[1])
                 elif "Player vs Player:" in line:
-                    scores["PVP"]["Wins"] = int(line.split("Wins=")[1].split(",")[0])
-                    scores["PVP"]["Losses"] = int(line.split("Losses=")[1])
+                    # Ensure the line has the correct format
+                    if "Wins=" in line and "Losses=" in line:
+                        scores["PVP"]["Wins"] = int(line.split("Wins=")[1].split(",")[0])
+                        scores["PVP"]["Losses"] = int(line.split("Losses=")[1])
     except FileNotFoundError:
         # If the file doesn't exist, initialize with default scores
         with open("scores.txt", "w") as file:
@@ -83,6 +86,17 @@ def load_scores():
             file.write("Hard: Wins=0, Losses=0\n")
             file.write("Player vs Player:\n")
             file.write("Wins=0, Losses=0\n")
+    except Exception as e:
+        print(f"Error loading scores: {e}")
+        # If there's an error, reset the scores to default
+        scores["PVAI"]["Easy"]["Wins"] = 0
+        scores["PVAI"]["Easy"]["Losses"] = 0
+        scores["PVAI"]["Medium"]["Wins"] = 0
+        scores["PVAI"]["Medium"]["Losses"] = 0
+        scores["PVAI"]["Hard"]["Wins"] = 0
+        scores["PVAI"]["Hard"]["Losses"] = 0
+        scores["PVP"]["Wins"] = 0
+        scores["PVP"]["Losses"] = 0
 
 # Save Scores to File
 def save_scores():
@@ -134,6 +148,8 @@ def home_screen():
 
 # Colour Scheme Selection Screen
 def colour_scheme_screen():
+    global BG_COLOR, LINE_COLOR, CIRCLE_COLOR, CROSS_COLOR
+
     # Define 5 colour schemes
     schemes = [
         {"BG_COLOR": (28, 170, 156), "LINE_COLOR": (23, 145, 135), "CIRCLE_COLOR": (239, 231, 200), "CROSS_COLOR": (66, 66, 66)},
@@ -155,6 +171,12 @@ def colour_scheme_screen():
         scheme_text = button_font.render(f"Scheme {i+1}", True, BUTTON_TEXT_COLOR)
         screen.blit(scheme_text, (WIDTH // 2 - scheme_text.get_width() // 2, HEIGHT // 2 - 85 + i * 60))
     
+    # Add "Back to Home" button
+    back_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 200, 200, 50)
+    pygame.draw.rect(screen, BUTTON_COLOR, back_button)
+    back_text = button_font.render("Back to Home", True, BUTTON_TEXT_COLOR)
+    screen.blit(back_text, (WIDTH // 2 - back_text.get_width() // 2, HEIGHT // 2 + 215))
+    
     pygame.display.update()
     
     while True:
@@ -166,13 +188,14 @@ def colour_scheme_screen():
                 mouseX, mouseY = event.pos
                 for i in range(5):
                     if buttons[i].collidepoint(mouseX, mouseY):
-                        global BG_COLOR, LINE_COLOR, CIRCLE_COLOR, CROSS_COLOR
+                        # Update global colour variables
                         BG_COLOR = schemes[i]["BG_COLOR"]
                         LINE_COLOR = schemes[i]["LINE_COLOR"]
                         CIRCLE_COLOR = schemes[i]["CIRCLE_COLOR"]
                         CROSS_COLOR = schemes[i]["CROSS_COLOR"]
-                        screen.fill(BG_COLOR)
-                        return
+                        return  # Return to home screen after selecting a scheme
+                if back_button.collidepoint(mouseX, mouseY):
+                    return  # Return to home screen
 
 # Symbol Selection Screen
 def symbol_selection_screen():
@@ -238,11 +261,12 @@ def difficulty_selection_screen():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouseX, mouseY = event.pos
                 if easy_button.collidepoint(mouseX, mouseY):
-                    return "easy"
+                    return "easy"  # Return selected difficulty
                 elif medium_button.collidepoint(mouseX, mouseY):
                     return "medium"
                 elif hard_button.collidepoint(mouseX, mouseY):
                     return "hard"
+    
 
 # Player vs Player Start Screen
 def pvp_start_screen(player_symbol):
@@ -270,7 +294,7 @@ def pvp_start_screen(player_symbol):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouseX, mouseY = event.pos
                 if start_button.collidepoint(mouseX, mouseY):
-                    return
+                    return  # Exit the function and start the game
 
 # Main Game Loop
 def main():
