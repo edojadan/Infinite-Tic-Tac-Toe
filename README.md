@@ -86,10 +86,10 @@ A modern twist on the classic Tic Tac Toe game, featuring a unique "infinite" ga
 ## Setup
 1. Ensure Python is installed
 2. Install Pygame: `pip install pygame`
-3. Run the game: `python game.py`
+3. Run the game: `python main.py`
 
 ## File Structure
-- `game.py` - Main game file
+- `main.py` - Main game file
 - `scores.txt` - Score tracking file
 
 ## Scoring System
