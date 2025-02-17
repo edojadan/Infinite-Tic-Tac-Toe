@@ -1,113 +1,117 @@
 # Infinite Tic Tac Toe
- An infinite tic tac toe game 
 
-Infinite Tic Tac Toe is a unique twist on the classic Tic Tac Toe game. Instead of a static 3x3 grid, the game features a sliding window of moves, where each player's oldest move disappears after they make their 4th move. This creates a dynamic and ever-changing board, adding a new layer of strategy to the game.
-
-The game also includes:
-
-A home screen with difficulty selection.
-
-An adaptive AI that learns from your moves at the hardest difficulty.
-
-A 2-second delay between the player's turn and the AI's turn for smoother gameplay.
-
-## Table of Contents
-- Features
-
-+ Installation
-
-+ How to Play
-
-+ Difficulty Levels
-
-+ Contributing
+A modern twist on the classic Tic Tac Toe game, featuring a unique "infinite" gameplay mechanic where pieces have limited permanence on the board. Built with Pygame, this game offers both Player vs Player and Player vs AI modes with multiple difficulty levels.
 
 ## Features
-**Infinite Gameplay**: The board is constantly updated, with each player's oldest move disappearing after their 4th move.
 
-**Difficulty Levels**: Choose from Easy, Medium, or Hard difficulty.
+### Multiple Game Modes
+- **Player vs Player (PVP)**
+  - Traditional 2-player gameplay
+  - Each player can have up to 3 pieces on the board
+  - Oldest piece disappears when placing a 4th piece
+  - Players can choose their symbol (X or O)
 
-**Adaptive AI**: At the hardest difficulty, the AI learns from your moves and adapts its strategy.
+- **Player vs AI (PVAI)**
+  - Play against the computer
+  - Three difficulty levels:
+    - Easy: Random moves
+    - Medium: Mix of random and strategic moves
+    - Hard: Uses minimax algorithm with memory for optimal play
+  - AI adapts to player's chosen symbol
 
-**Win Screen**: When a player wins, a momentary screen displays the winner before returning to the home screen.
+### Dynamic Board Mechanics
+- 3x3 grid with sliding window mechanics
+- Maximum of 6 pieces on board (3 per player)
+- Pieces automatically cycle as new ones are placed
+- Win condition remains traditional (3 in a row)
 
-**Back to Home Button**: A button allows you to return to the home screen at any time.
+### Customization Options
+- Five distinct color schemes to choose from
+- Custom color combinations for:
+  - Background
+  - Grid lines
+  - X's and O's
+  - One-click application of color schemes
 
-## Installation
-Prerequisites
+### Score Tracking
+- Persistent score tracking across sessions
+- Separate statistics for:
+  - PVP mode wins/losses
+  - PVAI mode with different difficulty levels
+  - Scores saved automatically after each game
+- Viewable statistics on difficulty selection screen
+
+### User Interface
+- Clean, modern design
+- Responsive buttons and controls
+- Clear visual feedback
+- Easy navigation with "Back to Home" option
+- Smooth transitions between screens
+
+### Additional Features
+- Game state preservation
+- Automatic score saving
+- Clear win/loss notifications
+- Configurable player symbols
+- AI move delay for better gameplay feel
+
+## Controls
+- Left mouse click to:
+  - Place pieces
+  - Select game modes
+  - Choose color schemes
+  - Navigate menus
+- Back button available during gameplay
+
+## Technical Details
+- Built with Python and Pygame
+- Implements minimax algorithm for AI
+- Uses alpha-beta pruning for optimization
+- Persistent storage for scores
+
+## Game Flow
+1. Start at home screen
+2. Choose game mode (PVP or PVAI)
+3. Select player symbol (X or O)
+4. For PVAI, select difficulty
+5. Play game with infinite mechanics
+6. View results and scores
+7. Return to home screen
+
+## Requirements
 - Python 3.x
+- Pygame library
+- Score tracking requires write permissions in game directory
 
-+ Pygame library
+## Setup
+1. Ensure Python is installed
+2. Install Pygame: `pip install pygame`
+3. Run the game: `python game.py`
 
-Steps
-Clone the Repository:
+## File Structure
+- `game.py` - Main game file
+- `scores.txt` - Score tracking file
 
-bash
-Copy
-git clone https://github.com/your-username/infinite-tic-tac-toe.git
-cd infinite-tic-tac-toe
-Install Pygame:
-If you don't have Pygame installed, you can install it using pip:
+## Scoring System
+The game automatically tracks and updates scores for:
+- PVP Mode:
+  - Player 1 wins
+  - Player 2 wins
+- PVAI Mode (per difficulty):
+  - Player wins
+  - AI wins
 
-bash
-Copy
-pip install pygame
-Run the Game:
+## Known Features
+- Pieces cycle automatically after 3 moves per player
+- Color schemes persist between sessions
+- AI difficulty affects move calculation time
+- Score tracking updates in real-time
 
-bash
-Copy
-python main.py
-
-## How to Play
-Home Screen:
-
-When you start the game, you'll see the home screen with difficulty options.
-
-Press 1 for Easy, 2 for Medium, or 3 for Hard.
-
-Gameplay:
-
-Click on the board to place your X.
-
-The AI will place an O in response after a 2-second delay.
-
-After each player makes their 4th move, their oldest move will disappear.
-
-Winning:
-
-The game checks for a win after each move.
-
-If a player wins, a screen will display the winner for 3 seconds before returning to the home screen.
-
-Back to Home:
-
-Click the "Back to Home" button at any time to return to the home screen.
-
-## Difficulty Levels
-Easy:
-
-The AI makes random moves.
-
-Medium:
-
-The AI mixes random moves with the Minimax algorithm.
-
-Hard:
-
-The AI uses the Minimax algorithm with Alpha-Beta pruning and **learns** from your moves.
-
-## Contributing
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
-
-Fork the repository.
-
-Create a new branch for your feature or bugfix.
-
-Commit your changes.
-
-Push your branch to your forked repository.
-
-Submit a pull request.
+## Tips
+- In PVP mode, strategize around the 3-piece limit
+- Against AI, consider the difficulty level's impact on strategy
+- Use color schemes to reduce eye strain
+- Watch for piece cycling to plan moves ahead
 
 ## Acknowledgments
 Thanks to the Pygame community for providing an excellent library for game development.
