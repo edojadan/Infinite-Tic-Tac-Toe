@@ -1,5 +1,7 @@
 # Infinite Tic Tac Toe
 
+wow!
+
 A modern twist on the classic Tic Tac Toe game, featuring a unique "infinite" gameplay mechanic where pieces have limited permanence on the board. Built with Pygame, this game offers both Player vs Player and Player vs AI modes with multiple difficulty levels.
 
 ## Features
